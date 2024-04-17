@@ -4,9 +4,7 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/Context/globalContext";
 
-type cityCordT={lat : number,lon: number,}
-
-function FlyToActiveCity({activeCityCords}:cityCordT ) {
+function FlyToActiveCity({activeCityCords}:any) {
   const map = useMap();
 
   useEffect(() => {
@@ -17,7 +15,7 @@ function FlyToActiveCity({activeCityCords}:cityCordT ) {
       };
 
       map.flyTo(
-        [activeCityCords.lat, activeCityCords.lon],
+        [activeCityCords?.lat, activeCityCords?.lon],
         zoomLev,
         flyToOptions
       );
@@ -38,7 +36,7 @@ function Mapbox() {
       <div>
         <h1>Loading</h1>
       </div>
-    );
+    ); 
   }
 
   return (
