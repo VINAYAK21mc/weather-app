@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/Context/globalContext";
 
-function FlyToActiveCity({activeCityCords}:any) {
+function FlyToActiveCity({ activeCityCords }: any) {
   const map = useMap();
 
   useEffect(() => {
@@ -36,22 +36,26 @@ function Mapbox() {
       <div>
         <h1>Loading</h1>
       </div>
-    ); 
+    );
   }
+  let cords=[Number(activeCityCords.lat), Number(activeCityCords.lon)]
+  let attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
   return (
     <div className="flex-1 basis-[50%] border rounded-lg">
       <MapContainer
-        center={[activeCityCords.lat, activeCityCords.lon]}
-        zoom={13}
-        scrollWheelZoom={false}
+        bounds={cords}
         className="rounded-lg m-4"
         style={{ height: "calc(100% - 2rem)", width: "calc(100% - 2rem)" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
+        <Marker position={cords}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
 
         <FlyToActiveCity activeCityCords={activeCityCords} />
       </MapContainer>
