@@ -1,5 +1,3 @@
-"use client";
-// import Image from "next/image";
 import Navbar from "./Components/Navbar";
 import Temperature from "./Components/Temperature/Temperature";
 import AirPollution from "./Components/Airpollution/Airpollution";
@@ -14,20 +12,11 @@ import Humidity from "./Components/Humidity/Humidity";
 import Visibility from "./Components/Visibility/Visibility";
 import Pressure from "./Components/Pressure/Pressure";
 import Mapbox from "./Components/Mapbox/Mapbox";
-import defaultStates from "./Utils/defaultStates";
-import { useGlobalContextUpdate } from "./Context/globalContext";
+import TopCities from "./Components/Top-Cities/TopCities";
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 export default function Home() {
-  const { setActiveCityCoords } = useGlobalContextUpdate();
-
-  const getClickedCityCords = (lat: number, lon: number) => {
-    setActiveCityCoords([lat, lon]);
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
   return (
     <main className="mx-[1rem] lg:mx-[2rem] xl:mx-[6rem] xl-2:mx-[16rem] m-auto">
       <Navbar />
@@ -55,21 +44,7 @@ export default function Home() {
               <h2 className="flex items-center gap-2 font-medium">
                 Top Large Cities
               </h2>
-              <div className="flex flex-col gap-4">
-                {defaultStates.map((state, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="border rounded-lg cursor-pointer dark:bg-dark-grey shadow-sm dark:shadow-none"
-                      onClick={() => {
-                        getClickedCityCords(state.lat, state.lon);
-                      }}
-                    >
-                      <p className="px-6 py-4">{state.name}</p>
-                    </div>
-                  );
-                })}
-              </div>
+              <TopCities />
             </div>
           </div>
         </div>
