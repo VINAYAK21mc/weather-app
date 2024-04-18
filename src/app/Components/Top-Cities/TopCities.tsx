@@ -1,12 +1,13 @@
-import { useGlobalContextUpdate } from '@/app/Context/globalContext';
+"use client"
+import { useGlobalContext} from '@/app/Context/globalContext';
 import defaultStates from '@/app/Utils/defaultStates';
 import React from 'react'
 
 const TopCities = () => {
-    const { setActiveCityCoords } = useGlobalContextUpdate();
+    const { setActiveCityCords } = useGlobalContext();
 
     const getClickedCityCords = (lat: number, lon: number) => {
-      setActiveCityCoords([lat, lon]);
+      setActiveCityCords([lat, lon]);
   
       window.scrollTo({
         top: 0,

@@ -3,8 +3,9 @@ import React, { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/Context/globalContext";
+import { Skeleton } from "@/components/ui/skeleton";
 
-function FlyToActiveCity({ activeCityCords }: any) {
+function FlyToActiveCity({ activeCityCords }) {
   const map = useMap();
 
   useEffect(() => {
@@ -33,23 +34,22 @@ function Mapbox() {
 
   if (!forecast || !forecast.coord || !activeCityCords) {
     return (
-      <div>
-        <h1>Loading</h1>
-      </div>
+     <Skeleton className="h-[12rem] w-full" />
     );
   }
   let cords=[Number(activeCityCords.lat), Number(activeCityCords.lon)]
-  let attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
   return (
     <div className="flex-1 basis-[50%] border rounded-lg">
       <MapContainer
-        bounds={cords}
+        center={cords}
+        zoom={13}
         className="rounded-lg m-4"
         style={{ height: "calc(100% - 2rem)", width: "calc(100% - 2rem)" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <Marker position={cords}>
           <Popup>
