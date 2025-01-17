@@ -99,6 +99,7 @@ export const GlobalContextProvider = ({ children }) => {
         geoCodedList,
         inputValue,
         handleInput,
+        setActiveCityCoords,
       }}
     >
       <GlobalContextUpdate.Provider

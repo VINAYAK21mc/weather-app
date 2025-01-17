@@ -4,10 +4,10 @@ import defaultStates from '@/app/Utils/defaultStates';
 import React from 'react'
 
 const TopCities = () => {
-    const { setActiveCityCords } = useGlobalContext();
+    const { setActiveCityCoords } = useGlobalContext();
 
     const getClickedCityCords = (lat: number, lon: number) => {
-      setActiveCityCords([lat, lon]);
+      setActiveCityCoords([lat, lon]);
   
       window.scrollTo({
         top: 0,
